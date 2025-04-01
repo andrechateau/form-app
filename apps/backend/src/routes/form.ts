@@ -29,6 +29,29 @@ async function formRoutes(app: FastifyInstance) {
       }
     },
   })
+
+  app.get<{
+    Params: IEntityId
+    Reply: Form
+  }>('/', {
+    async handler(req, reply) {
+      reply.send({
+        id:  '1',	
+        name: 'hello world',
+        fields: [],
+      });
+      // const { params } = req
+      // const { id } = params
+      // log.debug('get form by id')
+      // try {
+      //   const form = await prisma.form.findUniqueOrThrow({ where: { id } })
+      //   reply.send(form)
+      // } catch (err: any) {
+      //   log.error({ err }, err.message)
+      //   throw new ApiError('failed to fetch form', 400)
+      // }
+    },
+  })
 }
 
 export default formRoutes

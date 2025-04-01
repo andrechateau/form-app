@@ -6,10 +6,14 @@
   "directories": {
     "doc": "docs"
   },
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
+  },
   "dependencies": {
     "@fastify/cors": "^10.0.2",
     "@prisma/client": "^6.5.0",
-    "@repo/prisma": "workspace:*",
     "database": "workspace:*",
     "@sinclair/typebox": "^0.33.7",
     "env-cmd": "^10.1.0",
@@ -29,19 +33,12 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.7.2"
   },
-  "scripts": {
-    "dev": "nodemon src/index.ts",
-    "migrate": "docker exec -it vial-backend-b-api npx prisma migrate deploy",
-    "seed": "docker exec -it vial-backend-b-api npx prisma db seed",
-    "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix",
-    "prisma": "npx prisma generate"
-  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
   "prisma": {
-    "seed": "ts-node ../../prisma/seed.ts",
-    "schema": "../../prisma/schema.prisma"
+    "seed": "ts-node ../../packages/database/prisma/seed.ts",
+    "schema": "../../packages/database/prisma/schema.prisma"
   }
 }

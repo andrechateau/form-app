@@ -74,6 +74,7 @@ export interface FieldAndBuilder {
 }
 
 const openEditorEventProps = ({ formBuilder, field }: FieldAndBuilder) => {
+  
   let update = false;
   const state = { ...formBuilder.builderState, editorOpen: true };
 

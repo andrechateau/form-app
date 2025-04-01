@@ -13,7 +13,6 @@ datasource db {
 model Form {
   id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name      String
-  parent_id    String? @map("parent_id") @db.Uuid
   fields    Json
 
   @@map("form")
