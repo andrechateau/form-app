@@ -6,6 +6,7 @@ import prisma from '../db/db_client'
 import { serializer } from './middleware/pre_serializer'
 import { IEntityId } from './schemas/common'
 import { ApiError } from '../errors'
+import { PackageFieldTest } from 'forms'
 
 async function formRoutes(app: FastifyInstance) {
   app.setReplySerializer(serializer)
@@ -35,6 +36,11 @@ async function formRoutes(app: FastifyInstance) {
     Reply: Form
   }>('/', {
     async handler(req, reply) {
+      const test: PackageFieldTest = { 
+        test: 'test',
+      };
+
+      
       reply.send({
         id:  '1',	
         name: 'hello world',

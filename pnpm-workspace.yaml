@@ -2,6 +2,7 @@ packages:
   - apps/*
   - packages/*
   - prisma
+
 catalogs:
   prisma:
     prisma: latest

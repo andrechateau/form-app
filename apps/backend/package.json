@@ -14,10 +14,11 @@
   "dependencies": {
     "@fastify/cors": "^10.0.2",
     "@prisma/client": "^6.5.0",
-    "database": "workspace:*",
     "@sinclair/typebox": "^0.33.7",
+    "database": "workspace:*",
     "env-cmd": "^10.1.0",
-    "fastify": "^5.2.1"
+    "fastify": "^5.2.1",
+    "forms": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^18.19.70",
@@ -33,7 +34,6 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.7.2"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",

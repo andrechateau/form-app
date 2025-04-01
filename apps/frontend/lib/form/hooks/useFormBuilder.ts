@@ -1,11 +1,17 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { useFieldArray, UseFieldArrayReturn, useForm, UseFormReturn } from "react-hook-form";
 import { UUID } from 'crypto'
 import { z } from "zod";
 import { useMap } from "ahooks";
 import { nanoid } from 'nanoid'
 import { get } from "http";
+import { useFieldArray, UseFieldArrayReturn, useForm, UseFormReturn } from "react-hook-form";
 import { FieldDefinition, FieldDefinitionProperties, FormBuilderMode, FormBuilderState, ID } from "../form.metadata";
+import { PackageFieldTest } from "forms";
+
+// TODO: Remove test
+const test: PackageFieldTest = { 
+  test: 'test',
+};
 
 export type UseMapReturn<K, T> = readonly [
   Map<K, T>,
