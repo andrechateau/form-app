@@ -21,6 +21,7 @@
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^9.1.7",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "prisma": "^6.2.1",
@@ -33,7 +34,9 @@
     "seed": "docker exec -it vial-backend-b-api npx prisma db seed",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
-    "commit": "git add . && commitai | xargs -I {} git commit -m \"{}\""
+    "test": "echo Tests not implemented. Skipping",
+    "commit": "git add . && commitai | xargs -I {} git commit -m \"{}\"",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
