@@ -1,9 +1,11 @@
-export interface FieldDefinition {
-  name: string;
-  type: string;
-  description: string;
-  validation?: object;
-}
+// export interface FieldDefinition {
+//   name: string;
+//   type: string;
+//   description: string;
+//   validation?: object;
+// }
+
+import { FieldDefinition } from "./field.metadata";
 
 export interface Form {
   id: string;

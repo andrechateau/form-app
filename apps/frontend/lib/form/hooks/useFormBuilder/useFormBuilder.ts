@@ -4,71 +4,15 @@ import { z } from "zod";
 import { useMap } from "ahooks";
 import { nanoid } from 'nanoid'
 import { get } from "http";
-import { useFieldArray, UseFieldArrayReturn, useForm, UseFormReturn } from "react-hook-form";
-import { FieldDefinition, FieldDefinitionProperties, FormBuilderMode, FormBuilderState, ID } from "../form.metadata";
-import { PackageFieldTest } from "forms";
+import { useFieldArray, useForm } from "react-hook-form";
+import { FormBuilderMode, FormBuilderState, OptionalFieldAndBuilder, BuilderProps } from '../../form.metadata';
+import { FieldDefinition, FieldDefinitionProperties, ID, PackageFieldTest } from "forms";
+import { FieldMapOperations, FormBuilderStateProps, FormNameStateProps, FormProps, UseFieldMapAppend, UseFieldMapAppendFromArrayAndMap, UseFieldMapGet, UseFieldMapGetFromArrayAndMap, UseFieldMapInsert, UseFieldMapInsertFromArrayAndMap, UseFieldMapLoad, UseFieldMapLoadFromArrayAndMap, UseFieldMapMove, UseFieldMapMoveFromArrayAndMap, UseFieldMapPrepend, UseFieldMapPrependFromArrayAndMap, UseFieldMapRemove, UseFieldMapRemoveFromArrayAndMap, UseFieldMapReplace, UseFieldMapReplaceFromArrayAndMap, UseFieldMapReset, UseFieldMapResetFromArrayAndMap, UseFieldMapSwap, UseFieldMapSwapFromArrayAndMap, UseFieldMapUpdate, UseFieldMapUpdateFromArrayAndMap, UseFormBuilderForm, useReactiveMap } from "./useFormBuilder.metadata";
 
 // TODO: Remove test
 const test: PackageFieldTest = { 
   test: 'test',
 };
-
-export type UseMapReturn<K, T> = readonly [
-  Map<K, T>,
-  {
-    readonly set: (key: K, entry: T) => void;
-    readonly setAll: (newMap: Iterable<readonly [K, T]>) => void;
-    readonly remove: (key: K) => void;
-    readonly reset: () => void;
-    readonly get: (key: K) => T | undefined;
-  }
-];
-
-export interface IUseMapHookOperations<K, T> {
-  readonly set: (key: K, entry: T) => void;
-  readonly setAll: (newMap: Iterable<readonly [K, T]>) => void;
-  readonly remove: (key: K) => void;
-  readonly reset: () => void;
-  readonly get: (key: K) => T | undefined;
-}
-
-export interface IReactiveMap<K, T> {
-  map: Map<K, T>;
-  operations: IUseMapHookOperations<K, T>;
-}
-
-export const useReactiveMap = <K, T>(
-  useMapReturn: UseMapReturn<K, T>
-): IReactiveMap<K, T> => ({
-  map: useMapReturn[0],
-  operations: useMapReturn[1],
-});
-
-
-
-export type UseFieldMapRemove = (key: ID) => void;
-export type UseFieldMapReset = () => void;
-export type UseFieldMapSwap = (keyA: ID, keyB: ID) => void;
-export type UseFieldMapMove = (keyA: ID, keyB: ID) => void;
-export type UseFieldMapPrepend = (field: FieldDefinitionProperties) => void;
-export type UseFieldMapAppend =  (field: FieldDefinitionProperties) => void;
-export type UseFieldMapInsert =  (field: FieldDefinitionProperties) => void;
-export type UseFieldMapUpdate =  (field: FieldDefinition) => void;
-export type UseFieldMapReplace = (field: FieldDefinition) => void;
-export type UseFieldMapGet = (key?: string) => FieldDefinition | undefined;
-export type UseFieldMapLoad = (fields: FieldDefinitionProperties[], reset?: boolean) => void;
-
-export type UseFieldMapRemoveFromArrayAndMap  = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, key: ID) => void;
-export type UseFieldMapResetFromArrayAndMap   = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>) => void;
-export type UseFieldMapSwapFromArrayAndMap    = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, keyA: ID, keyB: ID) => void;
-export type UseFieldMapMoveFromArrayAndMap    = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, keyA: ID, keyB: ID) => void;
-export type UseFieldMapPrependFromArrayAndMap = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, field: FieldDefinitionProperties) => void;
-export type UseFieldMapAppendFromArrayAndMap  = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, field: FieldDefinitionProperties) => void;
-export type UseFieldMapInsertFromArrayAndMap  = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, field: FieldDefinitionProperties) => void;
-export type UseFieldMapUpdateFromArrayAndMap  = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, field: FieldDefinition) => void;
-export type UseFieldMapReplaceFromArrayAndMap = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, field: FieldDefinition) => void;
-export type UseFieldMapGetFromArrayAndMap     = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, key?: string) => FieldDefinition | undefined;
-export type UseFieldMapLoadFromArrayAndMap    = (fieldArray: UseFieldArrayReturn, fieldMap: IReactiveMap<ID, FieldDefinition>, fields: FieldDefinitionProperties[], reset?: boolean) => void;
 
 
 // TODO: Check reactivity fo multiple appends in a foreach!!! 
@@ -137,42 +81,11 @@ export const replaceFromArrayAndMap: UseFieldMapReplaceFromArrayAndMap  = (field
   throw new Error(`Not implemented yet[${[fieldArray, fieldMap, field]}]`)
 };
 
-export interface FieldMapOperations {
-  readonly load: UseFieldMapLoad;
-  readonly remove: UseFieldMapRemove;
-  readonly reset: UseFieldMapReset;
-  readonly get: UseFieldMapGet;
-  readonly swap: UseFieldMapSwap;
-  readonly move: UseFieldMapMove;
-  readonly prepend: UseFieldMapPrepend;
-  readonly append: UseFieldMapAppend;
-  readonly insert: UseFieldMapInsert;
-  readonly update: UseFieldMapUpdate;
-  readonly replace: UseFieldMapReplace;
-  readonly fields: FieldDefinition[];
-}
+export type UseFormBuilderReturn = FieldMapOperations & FormBuilderStateProps & FormNameStateProps & FormProps;
 
-export interface UseFormBuilderForm extends UseFormReturn {
-  uuid?: UUID
-  name?: string
-}
-
-export interface FormBuilderStateProps extends FieldMapOperations {
-  builderState: FormBuilderState,
-  setBuilderState: Dispatch<SetStateAction<FormBuilderState>>
-}
-
-export interface FormProps extends FieldMapOperations {
-  form: UseFormBuilderForm,
-  submit: () => void,
-  saveConfig: () => void,
-  loadConfig: () => void,
-  setMode: (mode: FormBuilderMode) => void,
-  cycleMode: () => void,
-}
-
-export interface UseFormBuilderReturn extends FieldMapOperations, FormBuilderStateProps, FormProps {
-}
+export const isBuilderMode = (fb: OptionalFieldAndBuilder | BuilderProps) => fb.formBuilder.builderState.mode === "builder";
+export const isInputMode = (fb: OptionalFieldAndBuilder | BuilderProps) => fb.formBuilder.builderState.mode === "input";
+export const isReadMode = (fb: OptionalFieldAndBuilder | BuilderProps) => fb.formBuilder.builderState.mode === "view";
 
 export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>): UseFormBuilderReturn => {
   const [builderState, setBuilderState] = useState<FormBuilderState>({
@@ -180,7 +93,7 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
     mode: "input",
     editorOpen: false,
   });
-  console.log('schema', schema);
+  const [name, setName] = useState<string>("Form");
 
   const form: UseFormBuilderForm = useForm();
 
@@ -258,6 +171,8 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
 
   return {
     form,
+    name,
+    setName,
     submit,
     saveConfig,
     loadConfig,

@@ -1,12 +1,12 @@
 "use client";
 import { ThemeModeToggle } from "@/components/ui/themeModeToggle";
 import React from "react";
-import { FormRenderer, isBuilderMode, isInputMode, isReadMode } from "@/components/form/form-renderer";
-import { useFormBuilder } from "@/lib/form/hooks/useFormBuilder";
+import { isBuilderMode, isInputMode, isReadMode, useFormBuilder } from "@/lib/form/hooks/useFormBuilder/useFormBuilder";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { NotebookPen, NotebookText, PencilRuler } from "lucide-react";
+import { FormBuilderComponent } from "@/components/form/ui/form-builder";
 
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
               <Separator className="col-span-12 bg-border min-w-4xl w-full  h-[1px] mb-3 mt-3"></Separator>
 
           </div>
-            <FormRenderer
+            <FormBuilderComponent
               name="main-form"
               formBuilder={formBuilder}
               form={formBuilder.form}

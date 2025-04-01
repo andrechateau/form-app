@@ -45,15 +45,15 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
 import { useForm, UseFormReturn } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem } from "../ui/form";
-import { UseFormBuilderReturn } from "../../lib/form/hooks/useFormBuilder";
-import { FieldAndBuilder } from "./form-renderer";
-import { PopoverContent } from "../ui/popover";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { UseFormBuilderReturn } from "@/lib/form/hooks/useFormBuilder/useFormBuilder";
+import { PopoverContent } from "@/components/ui/popover";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldType } from "@/lib/form/form.metadata";
+import { BuilderProps, FieldAndBuilder } from "@/lib/form/form.metadata";
+import { FieldType, ID } from "forms";
 
 export const isPopoverOpen = (formBuilder: UseFormBuilderReturn) =>
   formBuilder.builderState.editorOpen;
@@ -72,6 +72,27 @@ export const EditorPopoverContent: React.FC<{
     </PopoverContent>
   );
 };
+
+export const openEditorEventProps = ({ formBuilder, field }: FieldAndBuilder) => {
+  
+  let update = false;
+  const state = { ...formBuilder.builderState, editorOpen: true };
+
+  if(!formBuilder.builderState.editorOpen) {
+    state.editorOpen = true;
+    update = true;
+  }
+
+  if (formBuilder.builderState.selectedField !== field.key) {
+    state.selectedField = field.key as ID;
+    update = true;
+  }
+
+  if(update) {
+    formBuilder.setBuilderState(state);
+  }
+}
+
 
 export const FieldEditorCollapsibleTrigger = () => (
   <div className="indicator-item indicator-center indicator-bottom">
