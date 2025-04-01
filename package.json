@@ -32,7 +32,8 @@
     "migrate": "docker exec -it vial-backend-b-api npx prisma migrate deploy",
     "seed": "docker exec -it vial-backend-b-api npx prisma db seed",
     "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix"
+    "lint:fix": "eslint src --ext .ts --fix",
+    "commit": "git add . && commitai | xargs -I {} git commit -m \"{}\""
   },
   "keywords": [],
   "author": "",
