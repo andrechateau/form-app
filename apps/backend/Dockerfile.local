@@ -1,6 +1,15 @@
-FROM node:18 as development
+FROM node:22 as development
+
+# Install PNPM globally
+RUN npm install -g pnpm
 
 WORKDIR /usr/app
-COPY . .
-RUN npm install
-RUN npx prisma generate
+
+COPY ../.. .
+
+RUN pnpm install
+
+# Approve build scripts
+RUN pnpm approve-builds --approve
+
+RUN pnpm --filter backend prisma

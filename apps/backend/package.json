@@ -10,6 +10,7 @@
     "@fastify/cors": "^10.0.2",
     "@prisma/client": "^6.5.0",
     "@repo/prisma": "workspace:*",
+    "database": "workspace:*",
     "@sinclair/typebox": "^0.33.7",
     "env-cmd": "^10.1.0",
     "fastify": "^5.2.1"

@@ -12,11 +12,11 @@ services:
       - 5432:5432
   nodeserver:
     container_name: vial-backend-b-api
-    image: node:18.15.0
+    image: node:22.14.0
     build:
-      context: .
+      context: ./apps/backend
       dockerfile: Dockerfile.local
-    command: npm run dev
+    command: pnpm run dev
     volumes:
       - .:/usr/app/
       - /usr/app/node_modules

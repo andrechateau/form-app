@@ -1,4 +1,12 @@
 packages:
-  - "apps/*"
-  - "packages/*"
-  - "prisma"
+  - apps/*
+  - packages/*
+  - prisma
+catalogs:
+  prisma:
+    prisma: latest
+onlyBuiltDependencies:
+  - '@prisma/client'
+  - '@prisma/engines'
+  - esbuild
+  - prisma
