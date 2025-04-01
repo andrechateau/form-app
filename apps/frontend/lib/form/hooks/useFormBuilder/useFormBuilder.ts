@@ -154,6 +154,7 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
     const fieldSchema = JSON.parse(sample.fields) as Record<string, FieldDefinitionProperties>;
 
     form.name = sample.name;
+    setName(sample.name)
     load(Object.values(fieldSchema));
   }
 
