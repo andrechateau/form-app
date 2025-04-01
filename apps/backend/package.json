@@ -18,7 +18,8 @@
     "database": "workspace:*",
     "env-cmd": "^10.1.0",
     "fastify": "^5.2.1",
-    "forms": "workspace:*"
+    "forms": "workspace:*",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/node": "^18.19.70",
