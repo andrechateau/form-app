@@ -1,0 +1,42 @@
+{
+  "dependencies": {
+    "@fastify/cors": "^10.0.2",
+    "@prisma/client": "^6.2.0",
+    "@sinclair/typebox": "^0.33.7",
+    "env-cmd": "^10.1.0",
+    "fastify": "^5.2.1"
+  },
+  "name": "backend",
+  "description": "## Introduction The purpose of this project is to simulate the back-end development work at Vial. It implements the main stack we use for our APIs.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.70",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
+    "prisma": "^6.2.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.7.2"
+  },
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "migrate": "docker exec -it vial-backend-b-api npx prisma migrate deploy",
+    "seed": "docker exec -it vial-backend-b-api npx prisma db seed",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
+}
