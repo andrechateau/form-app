@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { NotebookPen, NotebookText, PencilRuler } from "lucide-react";
 import { FormBuilderComponent } from "@/components/form/builder/form-builder";
 import { FormList } from "@/components/form/data/form-list";
+import { saveConfig } from "./server/form.service";
 
 
 export default function Home() {
@@ -16,13 +17,13 @@ export default function Home() {
     <div className="flex justify-center h-screen w-full">
       <Card className="p-10 pt-2 mt-10 min-w-4xl max-w-5xl ">
         <div>
-          <FormList></FormList>
+          <FormList fb={formBuilder}></FormList>
         </div>
         <div>
           <div className="grid grid-cols-12">
               <div className="flex gap-1 col-span-10">
-                <Button onClick={() => formBuilder.saveConfig()}> Save Config</Button>
-                <Button onClick={() => formBuilder.loadConfig()}> Load Config</Button>
+                <Button onClick={() => saveConfig(formBuilder)}> Save Config</Button>
+                <Button onClick={() => {}/**formBuilder.loadConfig() **/ } > Load Config</Button>
               </div>
               <Button className="flex gap-1 col-span-1" variant="ghost" onClick={() => formBuilder.cycleMode()}>
                 { isBuilderMode({ formBuilder }) ?  <PencilRuler /> : null }

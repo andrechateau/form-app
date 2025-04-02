@@ -1,6 +1,6 @@
 import { FieldDefinition, FieldDefinitionProperties, ID } from "forms";
 import { UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
-import { FormBuilderMode, FormBuilderState } from "../../form.metadata";
+import { FormBuilder, FormBuilderMode, FormBuilderState } from "../../form.metadata";
 import { Dispatch, SetStateAction } from "react";
 import { UUID } from "crypto";
 
@@ -89,11 +89,15 @@ export interface FormNameStateProps extends FieldMapOperations {
   name: string,
   setName: Dispatch<SetStateAction<string>>
 }
+
+export interface FormIdStateProps extends FieldMapOperations {
+  id: string | undefined,
+  setId: Dispatch<SetStateAction<string | undefined>>
+}
+
 export interface FormProps extends FieldMapOperations {
   form: UseFormBuilderForm,
   submit: () => void,
-  saveConfig: () => void,
-  loadConfig: () => void,
   setMode: (mode: FormBuilderMode) => void,
   cycleMode: () => void,
 }

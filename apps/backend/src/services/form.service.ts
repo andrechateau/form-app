@@ -5,7 +5,7 @@ import { omit } from 'lodash'
 
 export const save = async (entity: Form): Promise<Form> =>
   await prisma.form.upsert({
-    where: { id: entity.id ?? '' },
+    where: { id: entity.id ?? '00000000-0000-0000-0000-000000000000' },
     update: { ...omit(entity, ['id']) },
     create: { ...omit(entity, ['id']) },
   })

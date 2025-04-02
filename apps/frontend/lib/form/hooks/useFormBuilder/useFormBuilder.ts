@@ -5,9 +5,9 @@ import { useMap } from "ahooks";
 import { nanoid } from 'nanoid'
 import { get } from "http";
 import { useFieldArray, useForm } from "react-hook-form";
-import { FormBuilderMode, FormBuilderState, OptionalFieldAndBuilder, BuilderProps } from '../../form.metadata';
-import { FieldDefinition, FieldDefinitionProperties, ID, PackageFieldTest } from "forms";
-import { FieldMapOperations, FormBuilderStateProps, FormNameStateProps, FormProps, UseFieldMapAppend, UseFieldMapAppendFromArrayAndMap, UseFieldMapGet, UseFieldMapGetFromArrayAndMap, UseFieldMapInsert, UseFieldMapInsertFromArrayAndMap, UseFieldMapLoad, UseFieldMapLoadFromArrayAndMap, UseFieldMapMove, UseFieldMapMoveFromArrayAndMap, UseFieldMapPrepend, UseFieldMapPrependFromArrayAndMap, UseFieldMapRemove, UseFieldMapRemoveFromArrayAndMap, UseFieldMapReplace, UseFieldMapReplaceFromArrayAndMap, UseFieldMapReset, UseFieldMapResetFromArrayAndMap, UseFieldMapSwap, UseFieldMapSwapFromArrayAndMap, UseFieldMapUpdate, UseFieldMapUpdateFromArrayAndMap, UseFormBuilderForm, useReactiveMap } from "./useFormBuilder.metadata";
+import { FormBuilderMode, FormBuilderState, OptionalFieldAndBuilder, BuilderProps, FormBuilder } from '../../form.metadata';
+import { FieldDefinition, FieldDefinitionProperties, FormPayload, ID, PackageFieldTest } from "forms";
+import { FieldMapOperations, FormBuilderStateProps, FormIdStateProps, FormNameStateProps, FormProps, UseFieldMapAppend, UseFieldMapAppendFromArrayAndMap, UseFieldMapGet, UseFieldMapGetFromArrayAndMap, UseFieldMapInsert, UseFieldMapInsertFromArrayAndMap, UseFieldMapLoad, UseFieldMapLoadFromArrayAndMap, UseFieldMapMove, UseFieldMapMoveFromArrayAndMap, UseFieldMapPrepend, UseFieldMapPrependFromArrayAndMap, UseFieldMapRemove, UseFieldMapRemoveFromArrayAndMap, UseFieldMapReplace, UseFieldMapReplaceFromArrayAndMap, UseFieldMapReset, UseFieldMapResetFromArrayAndMap, UseFieldMapSwap, UseFieldMapSwapFromArrayAndMap, UseFieldMapUpdate, UseFieldMapUpdateFromArrayAndMap, UseFormBuilderForm, useReactiveMap } from "./useFormBuilder.metadata";
 
 // TODO: Remove test
 const test: PackageFieldTest = { 
@@ -81,7 +81,7 @@ export const replaceFromArrayAndMap: UseFieldMapReplaceFromArrayAndMap  = (field
   throw new Error(`Not implemented yet[${[fieldArray, fieldMap, field]}]`)
 };
 
-export type UseFormBuilderReturn = FieldMapOperations & FormBuilderStateProps & FormNameStateProps & FormProps;
+export type UseFormBuilderReturn = FieldMapOperations & FormBuilderStateProps & FormNameStateProps & FormIdStateProps & FormProps;
 
 export const isBuilderMode = (fb: OptionalFieldAndBuilder | BuilderProps) => fb.formBuilder.builderState.mode === "builder";
 export const isInputMode = (fb: OptionalFieldAndBuilder | BuilderProps) => fb.formBuilder.builderState.mode === "input";
@@ -94,6 +94,7 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
     editorOpen: false,
   });
   const [name, setName] = useState<string>("Form");
+  const [id, setId] = useState<string | undefined>();
 
   const form: UseFormBuilderForm = useForm();
 
@@ -112,51 +113,7 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
   const update: UseFieldMapUpdate    = (field: FieldDefinition) => updateFromArrayAndMap(fieldArray, fieldMap, field);
   const replace: UseFieldMapReplace  = (field: FieldDefinition) => replaceFromArrayAndMap(fieldArray, fieldMap, field);
 
-  const submit = () => console.log('Submiting', form.getValues());
-  const saveConfig = () => {
-    console.log('Saving Config', form.getValues())
-    const fieldSchemas: Record<string, FieldDefinitionProperties> = {};
-    fields
-    .map((f) => get(f.key))
-    .filter((f) => f !== undefined)
-    .forEach((f) => (
-      fieldSchemas[f.key] = {
-      key: f.key,
-      question: f.question,
-      label: f.label,
-      type: f.type,
-      required: f.required,
-      description: f.description ?? "",
-      placeholder: f.description ?? "",
-      default: f.default ?? "",
-      row: f.row,
-      col: f.col,
-      span: f.span,
-      size: f.size,
-      options: f.options ?? [],
-    }));
-    
-    const formSchema = {
-      id: null,
-      name: "name",
-      fields: JSON.stringify(fieldSchemas)
-    }
-    console.log('Saving Config Schema:', formSchema)
-
-  };
-
-  const loadConfig = () => {
-    const sample = {
-      id: null,
-      name: "name",
-      fields: "{\"Field_o8Ecpiln8mvUu-JvFNfzN\":{\"key\":\"Field_o8Ecpiln8mvUu-JvFNfzN\",\"question\":\"One Field\",\"label\":\"One Field\",\"type\":\"text\",\"required\":false,\"description\":\"\",\"default\":\"\",\"row\":0,\"col\":0,\"span\":6,\"size\":0,\"options\":[]},\"Field_TULYdu7pbLbqecP975bZk\":{\"key\":\"Field_TULYdu7pbLbqecP975bZk\",\"question\":\"Even another\",\"label\":\"Even another\",\"type\":\"date\",\"required\":false,\"description\":\"\",\"default\":\"\",\"row\":0,\"col\":0,\"span\":6,\"size\":0,\"options\":[]},\"Field_BeDmjr-eCo8JjnoA6Jb7N\":{\"key\":\"Field_BeDmjr-eCo8JjnoA6Jb7N\",\"question\":\"More one Field\",\"label\":\"More one Field\",\"type\":\"date\",\"required\":false,\"description\":\"\",\"default\":\"\",\"row\":0,\"col\":0,\"span\":6,\"size\":0,\"options\":[]},\"Field_pIL42XjCc4UDxSUJdOcus\":{\"key\":\"Field_pIL42XjCc4UDxSUJdOcus\",\"question\":\"Other Field\",\"label\":\"Other Field\",\"type\":\"date\",\"required\":false,\"description\":\"\",\"default\":\"\",\"row\":0,\"col\":0,\"span\":6,\"size\":0,\"options\":[]}}"
-    };
-    const fieldSchema = JSON.parse(sample.fields) as Record<string, FieldDefinitionProperties>;
-
-    form.name = sample.name;
-    setName(sample.name)
-    load(Object.values(fieldSchema));
-  }
+  const submit = () => console.log('Submitting', form.getValues());
 
   const setMode = (mode: FormBuilderMode) => setBuilderState({...builderState, mode});
   const cycleMode = () => {
@@ -175,8 +132,6 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
     name,
     setName,
     submit,
-    saveConfig,
-    loadConfig,
     setMode,
     cycleMode,
     fields,
@@ -193,5 +148,7 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
     load,
     builderState,
     setBuilderState,
+    id,
+    setId,
   };
 };

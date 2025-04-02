@@ -1,9 +1,10 @@
+import { loadConfig } from '@/app/server/form.service';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { FormBuilder } from '@/lib/form/form.metadata';
 import { PairIdLabel } from 'forms'
 import { useState, useEffect } from 'react'
  
-
-export function FormList() {
+export const FormList: React.FC<{ fb: FormBuilder }> = ({ fb }) => {
   const [forms, setForms] = useState<PairIdLabel[]>([]);
  
   useEffect(() => {
@@ -16,14 +17,14 @@ export function FormList() {
     fetchPosts()
   }, [])
 
-  const loadForm = (id: string) => {
-    console.log("Load form:", id)
+  const loadForm = async (id: string) => {
+    const config = (await loadConfig(fb, id))
   }
-
+  
   if (!forms) return (<div>Loading...</div>)
  
   return (
-  <Select onValueChange={loadForm}>
+  <Select value={fb.name} onValueChange={loadForm}>
     <SelectTrigger className="w-[180px]">
       <SelectValue placeholder="Load a saved Form" />
     </SelectTrigger>
