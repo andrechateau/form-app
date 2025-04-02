@@ -1,7 +1,7 @@
 # Form App - Home Assignment
 
 This project is part of a home assignment to evaluate full-stack web development skills. The goal is to build a simple Form App where users can create customized forms and save the generated form data. The project follows a monorepo structure using pnpm for package management.
-The project is a work in progress, as I want to keep working on it after the acessement. There will be a few 'disabled' features that I have planned, but they are out of scope for this delivery.
+The project is a work in progress, as I want to keep working on it after the assessment. There will be a few 'disabled' features that I have planned, but they are out of scope for this delivery.
 
 ### Setup & Running the Project
 Ensure you have these dependencies installed:
@@ -137,9 +137,9 @@ Clicking in a form from this select list will load on the page. You can further 
 
 ##### Submitting a Form Source Record
 In the Input mode you'll be able to fill the fields as usual.
-There will be a "Submitt" buttom in the bottom of the page.
+There will be a "Submitt" button in the bottom of the page.
 If you click in it your answers to the questions will be submitted to the BE and persisted.
-You can't visualize your submittions yet, they are persisted the in the database, but not accessible by the app itself after submitted.
+You can't visualize your submissions yet, they are persisted the in the database, but not accessible by the app itself after submitted.
 
 # Screen shots
 
