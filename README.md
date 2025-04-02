@@ -141,6 +141,29 @@ There will be a "Submitt" button in the bottom of the page.
 If you click in it your answers to the questions will be submitted to the BE and persisted.
 You can't visualize your submissions yet, they are persisted the in the database, but not accessible by the app itself after submitted.
 
+# Limitations & Future Improvements
+At the moment, the project is still a work in progress and has some limitations that I plan to address in future iterations:
+
+1. No Automated Tests Yet
+There are no unit, integration, or end-to-end tests implemented yet.
+Future improvements include adding Jest for unit tests, Vitest for frontend testing, and Cypress for E2E testing.
+
+2. No Deployment Pipeline Yet
+There is no CI/CD setup for deploying the application.
+The project runs locally using Docker but doesn't have automated deployment configurations yet.
+Future improvements include setting up GitHub Actions for CI/CD and a proper deployment workflow for both frontend and backend.
+
+4. Limited Form Submission Handling
+Right now, form submissions are saved in the database but cannot be retrieved or displayed back to the user.
+A future improvement will be to add a UI for viewing submitted form responses.
+
+4. Field Customization Limitations
+Some form field properties, such as input size, are not yet fully configurable.
+Future iterations will include more flexibility in field customization.
+
+5. Missing User Authentication
+Currently, the app does not have user authentication or authorization.
+
 # Screen shots
 
 ### App Main Page
@@ -152,7 +175,6 @@ You can't visualize your submissions yet, they are persisted the in the database
 
 ##### Field Edit Exapanded Properties
 ![image](https://github.com/user-attachments/assets/9cb291cc-1439-42b3-af0a-905faaad38d6)
-
 
 ### Form Operation Modes
 ##### Input mode
