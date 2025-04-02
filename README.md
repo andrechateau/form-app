@@ -12,6 +12,9 @@ Ensure you have these dependencies installed:
 Run the following commands:
 1. copy the .env.example file into a .env file
  - `cp .env.example .env`
+ - `cp .env.example packages/database/.env`
+ - `cp .env.example apps/frontend/.env`
+ - `cp .env.example apps/backend/.env`
 2. Set the correct Node version
  - `nvm use`
 3. Install Dependencies
