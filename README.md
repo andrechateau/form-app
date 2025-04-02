@@ -3,6 +3,7 @@
 This project is part of a home assignment to evaluate full-stack web development skills. The goal is to build a simple Form App where users can create customized forms and save the generated form data. The project follows a monorepo structure using pnpm for package management.
 
 
+
 ### Setup & Running the Project
 Ensure you have these dependencies installed:
  - **NVM**: for managing the node version being used.
@@ -92,3 +93,33 @@ This project follows a monorepo structure using pnpm workspaces, which allows sh
 ### Contact
 
 If you have any questions, feel free to reach out!
+
+## Screen shots
+
+![image](https://github.com/user-attachments/assets/61fd122b-7e23-4134-8e83-d7ecd8e756c4)
+![image](https://github.com/user-attachments/assets/fbb34524-0242-44a2-9737-35c3a3450267)
+![image](https://github.com/user-attachments/assets/9cb291cc-1439-42b3-af0a-905faaad38d6)
+
+Input mode
+![image](https://github.com/user-attachments/assets/f587be6a-e5a5-4bc6-af5e-8fa4e7991a9f)
+
+Builder mode
+![image](https://github.com/user-attachments/assets/852c57be-d954-424a-9d48-6847b1b4f1c5)
+
+Read-Only mode
+![image](https://github.com/user-attachments/assets/c2c0d2e3-9554-4691-a3f8-bc4a4e9d138f=150x150)
+
+Text field
+![image](https://github.com/user-attachments/assets/f587be6a-e5a5-4bc6-af5e-8fa4e7991a9f)
+
+Text Area
+![image](https://github.com/user-attachments/assets/f15fff38-c6fe-4db7-807b-1c52c14c2671)
+
+Number
+![image](https://github.com/user-attachments/assets/4239df68-6dfc-49b0-a434-67b91255fd5e)
+
+Date Picker
+![image](https://github.com/user-attachments/assets/c9873669-44cb-4f87-a0e5-5000bdf59e6b)
+
+Separator
+![image](https://github.com/user-attachments/assets/5a25ddda-8554-4c1d-b4ba-73aa019dd503)
