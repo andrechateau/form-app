@@ -10,16 +10,16 @@ export const saveConfig = async (f: FormBuilder): Promise<boolean> => {
     fields: f.fields.map((field) => f.get(field.key)).filter((field) => field !== undefined),
   }
 
-  console.log('Saving Form:', payload);
-  const data = await fetch('http://localhost:8080/form/save',{
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: 
-    JSON.stringify(payload),  
-  }
+  const data = await fetch('http://localhost:8080/form/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: 
+      JSON.stringify(payload),  
+    }
   )
+  
   const response = (await data.json()).data;
 
   if (!f.id) {

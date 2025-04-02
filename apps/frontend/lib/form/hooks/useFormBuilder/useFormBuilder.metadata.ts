@@ -97,7 +97,7 @@ export interface FormIdStateProps extends FieldMapOperations {
 
 export interface FormProps extends FieldMapOperations {
   form: UseFormBuilderForm,
-  submit: () => void,
+  newForm: () => void,
   setMode: (mode: FormBuilderMode) => void,
   cycleMode: () => void,
 }

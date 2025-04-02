@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid'
 import { get } from "http";
 import { useFieldArray, useForm } from "react-hook-form";
 import { FormBuilderMode, FormBuilderState, OptionalFieldAndBuilder, BuilderProps, FormBuilder } from '../../form.metadata';
-import { FieldDefinition, FieldDefinitionProperties, FormPayload, ID, PackageFieldTest } from "forms";
+import { FieldDefinition, FieldDefinitionProperties, FormPayload, ID, PackageFieldTest, RecordPayload } from "forms";
 import { FieldMapOperations, FormBuilderStateProps, FormIdStateProps, FormNameStateProps, FormProps, UseFieldMapAppend, UseFieldMapAppendFromArrayAndMap, UseFieldMapGet, UseFieldMapGetFromArrayAndMap, UseFieldMapInsert, UseFieldMapInsertFromArrayAndMap, UseFieldMapLoad, UseFieldMapLoadFromArrayAndMap, UseFieldMapMove, UseFieldMapMoveFromArrayAndMap, UseFieldMapPrepend, UseFieldMapPrependFromArrayAndMap, UseFieldMapRemove, UseFieldMapRemoveFromArrayAndMap, UseFieldMapReplace, UseFieldMapReplaceFromArrayAndMap, UseFieldMapReset, UseFieldMapResetFromArrayAndMap, UseFieldMapSwap, UseFieldMapSwapFromArrayAndMap, UseFieldMapUpdate, UseFieldMapUpdateFromArrayAndMap, UseFormBuilderForm, useReactiveMap } from "./useFormBuilder.metadata";
 
 // TODO: Remove test
@@ -113,7 +113,16 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
   const update: UseFieldMapUpdate    = (field: FieldDefinition) => updateFromArrayAndMap(fieldArray, fieldMap, field);
   const replace: UseFieldMapReplace  = (field: FieldDefinition) => replaceFromArrayAndMap(fieldArray, fieldMap, field);
 
-  const submit = () => console.log('Submitting', form.getValues());
+  const newForm: UseFieldMapReset      = () => {
+    resetFromArrayAndMap(fieldArray, fieldMap);
+    setName("Form");
+    setId(undefined);
+    setBuilderState({
+      selectedField: undefined,
+      mode: "builder",
+      editorOpen: false,
+    });
+  }
 
   const setMode = (mode: FormBuilderMode) => setBuilderState({...builderState, mode});
   const cycleMode = () => {
@@ -131,7 +140,6 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
     form,
     name,
     setName,
-    submit,
     setMode,
     cycleMode,
     fields,
@@ -150,5 +158,6 @@ export const useFormBuilder = (schema?: z.ZodObject<never, never, never, never>)
     setBuilderState,
     id,
     setId,
+    newForm,
   };
 };

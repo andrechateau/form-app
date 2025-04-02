@@ -15,7 +15,7 @@ export const FormList: React.FC<{ fb: FormBuilder }> = ({ fb }) => {
       setForms(data.data)
     }
     fetchPosts()
-  }, [])
+  }, [fb.id])
 
   const loadForm = async (id: string) => {
     const config = (await loadConfig(fb, id))
