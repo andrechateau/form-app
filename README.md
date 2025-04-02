@@ -1,8 +1,7 @@
 # Form App - Home Assignment
 
 This project is part of a home assignment to evaluate full-stack web development skills. The goal is to build a simple Form App where users can create customized forms and save the generated form data. The project follows a monorepo structure using pnpm for package management.
-
-
+The project is working in progress, as I want to keep working on it after the acessement. There will be a few "disabled" features, that I've planned to do, but out of scope of this delivery.
 
 ### Setup & Running the Project
 Ensure you have these dependencies installed:
@@ -96,9 +95,14 @@ If you have any questions, feel free to reach out!
 
 # Screen shots
 
-### 
+### App Main Page
 ![image](https://github.com/user-attachments/assets/61fd122b-7e23-4134-8e83-d7ecd8e756c4)
+
+### Form Builder 
+##### Field Quick Edit 
 ![image](https://github.com/user-attachments/assets/fbb34524-0242-44a2-9737-35c3a3450267)
+
+##### Field Edit Exapanded Properties
 ![image](https://github.com/user-attachments/assets/9cb291cc-1439-42b3-af0a-905faaad38d6)
 
 
