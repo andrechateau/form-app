@@ -1,62 +1,66 @@
-// import { FastifyInstance } from 'fastify'
+import { FastifyInstance } from 'fastify'
 
-// import { Form } from '@prisma/client'
+import { serializer } from './middleware/pre_serializer'
+import { ApiError } from '../errors'
+import { RecordPayload } from 'forms'
+import { save } from '../services/record.service'
 
-// import prisma from '../db/db_client'
-// import { serializer } from './middleware/pre_serializer'
-// import { IEntityId } from './schemas/common'
-// import { ApiError } from '../errors'
-// import { PackageFieldTest } from 'forms'
+async function recordRoutes(app: FastifyInstance) {
+  app.setReplySerializer(serializer)
 
-// async function formRoutes(app: FastifyInstance) {
-//   app.setReplySerializer(serializer)
+  const log = app.log.child({ component: 'recordRoutes' })
 
-//   const log = app.log.child({ component: 'formRoutes' })
+  app.post<{
+    Body: RecordPayload
+    Reply: RecordPayload
+  }>('/save', {
+    async handler(req, reply) {
+      try {
+        const recordAndData = await save({
+          record: req.body,
+          data: req.body.data,
+        })
 
-//   app.get<{
-//     Params: IEntityId
-//     Reply: Form
-//   }>('/:id', {
-//     async handler(req, reply) {
-//       const { params } = req
-//       const { id } = params
-//       log.debug('get form by id')
-//       try {
-//         const form = await prisma.form.findUniqueOrThrow({ where: { id } })
-//         reply.send(form)
-//       } catch (err: any) {
-//         log.error({ err }, err.message)
-//         throw new ApiError('failed to fetch form', 400)
-//       }
-//     },
-//   })
+        reply.send({
+          ...recordAndData.record,
+          data: recordAndData.data,
+        })
+      } catch (err: any) {
+        log.error({ err }, err.message)
+        throw new ApiError('failed to fetch form', 400)
+      }
+    },
+  })
 
-//   app.get<{
-//     Params: IEntityId
-//     Reply: Form
-//   }>('/', {
-//     async handler(req, reply) {
-//       const test: PackageFieldTest = {
-//         test: 'test',
-//       };
+  // app.get<{
+  //   Reply: PairIdLabel[]
+  // }>('/list', {
+  //   async handler(_, reply) {
+  //     try {
+  //       reply.send(await list())
+  //     } catch (err: any) {
+  //       log.error({ err }, err.message)
+  //       throw new ApiError('failed to fetch form', 400)
+  //     }
+  //   },
+  // })
 
-//       reply.send({
-//         id:  '1',
-//         name: 'hello world',
-//         fields: [],
-//       });
-//       // const { params } = req
-//       // const { id } = params
-//       // log.debug('get form by id')
-//       // try {
-//       //   const form = await prisma.form.findUniqueOrThrow({ where: { id } })
-//       //   reply.send(form)
-//       // } catch (err: any) {
-//       //   log.error({ err }, err.message)
-//       //   throw new ApiError('failed to fetch form', 400)
-//       // }
-//     },
-//   })
-// }
+  // app.get<{
+  //   Params: IEntityId
+  //   Reply: FormPayload
+  // }>('/:id', {
+  //   async handler(req, reply) {
+  //     const { params } = req
+  //     const { id } = params
 
-// export default formRoutes
+  //     try {
+  //       reply.send(convertFormEntityToPayload(await get(id)))
+  //     } catch (err: any) {
+  //       log.error({ err }, err.message)
+  //       throw new ApiError('failed to fetch form', 400)
+  //     }
+  //   },
+  // })
+}
+
+export default recordRoutes

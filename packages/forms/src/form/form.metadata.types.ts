@@ -13,3 +13,14 @@ export interface FormPayload {
   fields: FieldDefinition[],
 }
 
+export interface SourceDataPayload {
+  id: UUID | string,
+  question: string;
+  answer: string;
+  sourceRecordId: string;
+}
+export interface RecordPayload {
+  id: UUID | string,
+  formId: string;
+  data: SourceDataPayload[]
+}
