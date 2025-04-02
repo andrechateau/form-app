@@ -36,13 +36,12 @@
 //     Reply: Form
 //   }>('/', {
 //     async handler(req, reply) {
-//       const test: PackageFieldTest = { 
+//       const test: PackageFieldTest = {
 //         test: 'test',
 //       };
 
-      
 //       reply.send({
-//         id:  '1',	
+//         id:  '1',
 //         name: 'hello world',
 //         fields: [],
 //       });

@@ -1,4 +1,4 @@
-interface PairIdLabel {
+export interface PairIdLabel {
   id: string;
   label: string;
 }
