@@ -23,6 +23,7 @@ Run the following commands:
  - `pnpm db:docker:start`
 5. Apply Migrations & Seed Data
  - `pnpm db:deploy`
+ - `pnpm db:generate`
  - `pnpm db:seed`
 6. Run the Back End API Server:
  - `pnpm be:dev`
