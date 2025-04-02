@@ -10,8 +10,8 @@ export interface RecordAndData {
 export const save = async (rd: RecordAndData): Promise<RecordAndData> => {
   const recordSaved = await prisma.sourceRecord.upsert({
     where: { id: rd.record.id ?? '00000000-0000-0000-0000-000000000000' },
-    update: { ...omit(rd.record, ['id']) },
-    create: { ...omit(rd.record, ['id']) },
+    update: { ...omit(rd.record, ['id', 'data']) },
+    create: { ...omit(rd.record, ['id', 'data']) },
   })
 
   await prisma.sourceData.createMany({

@@ -4,13 +4,18 @@ import { UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Popover } from "../../ui/popover";
 import { isInputMode, UseFormBuilderReturn } from "@/lib/form/hooks/useFormBuilder/useFormBuilder";
-import { FieldAndBuilder } from "@/lib/form/form.metadata";
+import { FieldAndBuilder, FormBuilder } from "@/lib/form/form.metadata";
 import { EditorPopoverContent } from "../editor/field-editor";
 import { FormHeaderComponent } from "./form-header";
 import { FormFieldsGridComponent } from "./form-grid";
 import { submit } from "@/app/server/record.service";
+import { toast } from "sonner"
 
 export const getFieldIndex = (fb: FieldAndBuilder) => fb.formBuilder.fields.findIndex((f) => f.id == fb.field.id)
+export const submitForm = async (f: FormBuilder) => {
+  await submit(f);
+  toast('Form Submitted!')
+}
 
 export const FormSubmitButtonComponent: React.FC<{ formBuilder: UseFormBuilderReturn }> =({ formBuilder}) => {
   return (

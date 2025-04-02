@@ -39,8 +39,6 @@ export const getFromArrayAndMap:  UseFieldMapGetFromArrayAndMap       = (_, fiel
 
 
 export const insertFromArrayAndMap: UseFieldMapInsertFromArrayAndMap  = (fieldArray, fieldMap, field) => {
-  console.log('insert', fieldArray, fieldMap, field)
-  console.log('append', fieldArray)
 
   if (field && (field as FieldDefinition)?.id && getFromArrayAndMap(fieldArray, fieldMap, (field as FieldDefinition)?.id)) return updateFromArrayAndMap(fieldArray, fieldMap, field as FieldDefinition);
   const nano = nanoid();
@@ -50,7 +48,7 @@ export const insertFromArrayAndMap: UseFieldMapInsertFromArrayAndMap  = (fieldAr
       ...field
     }
   fieldArray.append(nextField);
-  console.log('append', fieldArray)
+
   fieldMap.operations.set(nextField.key, nextField);
   return get(nextField.key);
 };

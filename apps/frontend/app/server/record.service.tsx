@@ -4,12 +4,12 @@ import { RecordPayload, FieldDefinition } from "forms";
   export const submit = async (f: FormBuilder) => {
     const values = f.form.getValues();
     if(!f.id || !values) return null;
-    
+
     const recordPayload: RecordPayload = {
       formId: f.id,
       data: values.dynamicFields.map((field: FieldDefinition) => ({
         id: null,
-        question: field.question,
+        question: f.get(field.key)?.question,
         answer: (field as any).value,
         sourceRecordId: null,
       }))
@@ -31,7 +31,9 @@ import { RecordPayload, FieldDefinition } from "forms";
     f.setId(response.id);
   }
 
+  const fields = [...f.fields];
   f.form.reset();
-  
+  f.load(fields);
+
   return true;
 }

@@ -11,7 +11,6 @@ export const FormList: React.FC<{ fb: FormBuilder }> = ({ fb }) => {
     async function fetchPosts() {
       const res = await fetch('http://localhost:8080/form/list')
       const data = await res.json()
-      console.log(data.data);
       setForms(data.data)
     }
     fetchPosts()

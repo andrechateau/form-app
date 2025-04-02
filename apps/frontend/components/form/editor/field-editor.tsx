@@ -593,7 +593,6 @@ const FieldEditor: React.FC<{ formBuilder: UseFormBuilderReturn }> = ({
   useEffect(() => {
     const subscription = form.watch((values) => {
       const field = formBuilder.get(formBuilder.builderState.selectedField);
-      console.log('values', values)
       if (field) {
         formBuilder.update({
           ...field,

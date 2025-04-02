@@ -9,6 +9,7 @@ import { NotebookPen, NotebookText, PencilRuler } from "lucide-react";
 import { FormBuilderComponent } from "@/components/form/builder/form-builder";
 import { FormList } from "@/components/form/data/form-list";
 import { saveConfig } from "./server/form.service";
+import { Toaster } from "@/components/ui/toaster";
 
 
 export default function Home() {
@@ -44,6 +45,7 @@ export default function Home() {
             />
         </div>
         </Card>
+      <Toaster />
     </div>
   );
 }
