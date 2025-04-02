@@ -1,13 +1,13 @@
 # Form App - Home Assignment
 
 This project is part of a home assignment to evaluate full-stack web development skills. The goal is to build a simple Form App where users can create customized forms and save the generated form data. The project follows a monorepo structure using pnpm for package management.
-The project is working in progress, as I want to keep working on it after the acessement. There will be a few "disabled" features, that I've planned to do, but out of scope of this delivery.
+The project is a work in progress, as I want to keep working on it after the acessement. There will be a few 'disabled' features that I have planned, but they are out of scope for this delivery.
 
 ### Setup & Running the Project
 Ensure you have these dependencies installed:
  - **NVM**: for managing the node version being used.
  - **PNPM**: for managing the monorepo.
- - **Docker**: You don't need really it, but its recommended.
+ - **Docker**: You don’t really need it, but it’s recommended.
 
 Run the following commands:
 1. copy the .env.example file into a .env file
@@ -97,8 +97,8 @@ If you have any questions, feel free to reach out!
 
 The main, and only page, in the app is the form.
 
-##### Modes of operation
-The form has 3 modes of operation, and you can change it on the top right toggle button, next to the theme toggle.
+##### Operation Modes
+The form has 3 Operation Modes, and you can change it on the top right toggle button, next to the theme toggle.
 These modes are:
  -  ![image](https://github.com/user-attachments/assets/614f5bb0-ffe1-4895-ac15-453d6ffa8e4d) **Builder mode**: In this mode when you click on a field a editor popover shows up so you can edit the field properties. You can save your form config, and will be persisted in the database.
  - ![image](https://github.com/user-attachments/assets/aa6c64ea-c362-4a39-ae78-64aa1de9b114) **Input mode**: This is a regular form mode: you fill all the fields, and submit the form in the end. The app saves it, but we won't retrieve the submited forms to the user yet.
